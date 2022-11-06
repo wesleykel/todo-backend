@@ -1,9 +1,20 @@
 import express, { response } from "express";
-import { createTodo ,getTodo } from "../models/todo_model.js";
+import { createTodo ,getTodo,getTodoById,deleteTodo ,updateTodo } from "../models/todo_model.js";
 
 const router = express()
 router.get('/', (req, res) => {
     getTodo()
+    .then(response=>{
+
+        res.status(200).json(response)
+    }) .catch(error => {
+        res.status(500).send(error);
+      })
+    
+  })
+  .get('/:id', (req, res) => {
+      let id = req.params.id
+    getTodoById(id)
     .then(response=>{
 
         res.status(200).send(response)
@@ -12,8 +23,8 @@ router.get('/', (req, res) => {
       })
     
   })
-.post('/', (req, res) => {
-    let newTodo =req.body
+  .post('/', (req, res) => {
+    let newTodo =req.body;
     createTodo(newTodo)
     .then(response =>{
         res.status(200).send(response)
@@ -24,11 +35,30 @@ router.get('/', (req, res) => {
       })
     
   })
-.put('/', (req, res) => {
-    res.send('PUT request to the homepage')
+.put('/:id', (req, res) => {
+    let id = req.params.id;
+    let todoUpdate = req.body.todo;
+    updateTodo(id, todoUpdate)
+    .then(response =>{
+        res.status(200).send(response)
+    
+    })
+    .catch(error => {
+        res.status(500).send(error);
+      })
+   
   })
-  .delete('/', (req, res) => {
-    res.send('DELETE request to the homepage')
+  .delete('/:id', (req, res) => {
+   let id = req.params.id
+    deleteTodo(id)
+    .then(response =>{
+        res.status(200).send(response)
+    
+    })
+    .catch(error => {
+        res.status(500).send(error);
+      })
+   
   })
   export default router 
 
