@@ -1,19 +1,42 @@
 import pool from "../db/connections.js"
 
 
+export const getTodo =()=>{
+
+return new Promise(function (resolve,reject){
+
+
+pool.query('SELECT * FROM todo',(error, results)=>{
+
+    if(error){
+        reject(error)
+    }
+
+    resolve(results.rows)
 
 
 
 
+})
 
 
-/*const createUser = (body)=>{
+})
+
+
+
+
+}
+
+
+
+
+export const createTodo = (body)=>{
 
     return new Promise(function (resolve, reject){
     
-        const { firstname , surname , email, password , age , birth_date} = body
+        const {todo} = body
     
-        pool.query('INSERT INTO  users (firstname, surname, email, password, age, birth_date) VALUES ($1,$2,$3,$4,$5,$6) RETURNING *',[firstname,surname, email, password, age, birth_date],(error, results)=>{
+        pool.query('INSERT INTO todo (todo) VALUES ($1) RETURNING *',[todo],(error, results)=>{
     
     
             if(error){
@@ -24,4 +47,7 @@ import pool from "../db/connections.js"
         })
         
           }) 
-        }*/
+        }
+
+
+   
