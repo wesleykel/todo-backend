@@ -3,7 +3,6 @@ import cors from "cors"
 import chalk from "chalk"
 import todo from "./routes/todo.js"
 import * as dotenv from 'dotenv';
-//import newTable from "./scripts/createTable.js"
 import morgan from "morgan"
 
 dotenv.config();
