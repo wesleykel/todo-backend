@@ -43,7 +43,7 @@ export const getTodoById =(id)=>{
 
 export const createTodo = (body)=>{
 
-return new Promise(function (resolve, reject){
+     return new Promise(function (resolve, reject){
     
 const {todo} = body
     
@@ -66,7 +66,7 @@ export const deleteTodo = (id)=>{
 
 return new Promise(function (resolve, reject){
         
-pool.query(`DELETE FROM todo WHERE todo=${body} id ='${id}'`, (error, results)=>{
+pool.query(`DELETE FROM todo WHERE id ='${id}'`, (error, results)=>{
         
 if(error){
  reject(error)
